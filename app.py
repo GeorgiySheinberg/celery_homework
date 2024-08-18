@@ -64,7 +64,7 @@ class Comparison(MethodView):
         image.save(path)
         return path
 
-@app.route('/download/<filename>')
+@app.route('/processed/<filename>')
 def download(filename):
     return send_from_directory('files', filename, as_attachment=True)
 
@@ -72,7 +72,6 @@ def download(filename):
 comparison_view = Comparison.as_view('comparison')
 app.add_url_rule('/tasks/<task_id>', view_func=comparison_view, methods=['GET'])
 app.add_url_rule('/upscale', view_func=comparison_view, methods=['POST'])
-app.add_url_rule('/processed/{file}', view_func=comparison_view, methods=['GET'])
 
 if __name__ == '__main__':
     app.run()
